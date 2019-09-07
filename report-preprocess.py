@@ -19,5 +19,5 @@ for i, report_path in enumerate(report_path_list):
     matched_pattern = df.iloc[:, 0].str.match(pattern)
     reports.append(df.where(matched_pattern).dropna())
 
-final_reports = pd.concat(reports).drop_duplicates()
+final_reports = pd.concat(reports, sort=False).drop_duplicates().iloc[:, [0, 1]]
 final_reports.to_csv(os.path.join(output_dir, 'report.csv'), index=False, header=False)
